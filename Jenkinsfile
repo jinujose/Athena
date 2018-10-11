@@ -10,8 +10,7 @@ pipeline {
 		{
 			steps {
 				sh 'dotnet test'
-				sh 'cp -R TestResults/TestResult.xml .' 
-				step([$class: 'MSTestPublisher', testResultsFile: 'TestResult.xml', failOnError: true, keepLongStdio: true])
+				
 			}
 		}
 		stage('Build image') {
