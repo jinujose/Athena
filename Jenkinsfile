@@ -1,9 +1,6 @@
 pipeline {
 	agent { label 'master' }
-	environment {        	
-		myVersion = '0.9'
-	        dotnet = 'path\to\dotnet.exe'
-    	}
+	
         tools {
        		 msbuild '.NET Core 2.0.0'
         }
@@ -13,12 +10,7 @@ pipeline {
 				checkout scm
 			}
 		}
-		stage ('UnitTests')
-		{
-			bat returnStatus: true, script: "\"C:/Program Files/dotnet/dotnet.exe\" test \"${workspace}/XUnitTestProject1.sln\" --logger \"trx;LogFileName=unit_tests.xml\" --no-build"
-			step([$class: 'MSTestPublisher', testResultsFile:"**/unit_tests.xml", failOnError: true, keepLongStdio: true])
-			
-		}
+		
 		stage('Build image') {
 			steps {
 				sh 'docker build -t {IMAGE_NAME} .'
