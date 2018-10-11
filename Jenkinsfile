@@ -10,7 +10,7 @@ pipeline {
 		
 		stage('Build image') {
 			steps {
-				sh 'docker build -t https://github.com/jinujose/Athena'
+				sh 'docker build -t athena'
 			}
 		} 
 		stage('Push image') {
