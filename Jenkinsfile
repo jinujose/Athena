@@ -6,12 +6,11 @@ pipeline {
 				checkout scm
 			}
 		}
-		stage('Tests')
+		stage ('UnitTests')
 		{
-			steps {
-				sh 'dotnet test'
-				
-			}
+			bat returnStatus: true, script: "\"C:/Program Files/dotnet/dotnet.exe\" test \"${workspace}/XUnitTestProject1.sln\" --logger \"trx;LogFileName=unit_tests.xml\" --no-build"
+			step([$class: 'MSTestPublisher', testResultsFile:"**/unit_tests.xml", failOnError: true, keepLongStdio: true])
+			
 		}
 		stage('Build image') {
 			steps {
