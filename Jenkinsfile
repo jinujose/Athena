@@ -9,7 +9,7 @@ pipeline {
 		stage('Tests')
 		{
 			steps {
-				sh 'dotnet test {XUnitTestProject1}.csproj -c Release --logger "trx;LogFileName=TestResult.xml"'
+				sh 'dotnet test'
 				sh 'cp -R TestResults/TestResult.xml .' 
 				step([$class: 'MSTestPublisher', testResultsFile: 'TestResult.xml', failOnError: true, keepLongStdio: true])
 			}
