@@ -1,9 +1,6 @@
 pipeline {
 	agent { label 'master' }
 	
-        tools {
-       		 msbuild '.NET Core 2.0.0'
-        }
 	stages {
 		stage('Checkout') {
 			steps {
