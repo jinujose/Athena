@@ -1,5 +1,12 @@
 pipeline {
 	agent { label 'master' }
+	environment {        	
+		myVersion = '0.9'
+	        dotnet = 'path\to\dotnet.exe'
+    	}
+        tools {
+       		 msbuild '.NET Core 2.0.0'
+        }
 	stages {
 		stage('Checkout') {
 			steps {
