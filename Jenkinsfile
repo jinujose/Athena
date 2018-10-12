@@ -6,14 +6,7 @@ pipeline {
 				checkout scm
 			}
 		}
-		stage('Tests')
-		{
-			steps {
-				sh 'dotnet test XUnitTestProject1.csproj -c Release --logger "trx;LogFileName=TestResult.xml"'
-				sh 'cp -R TestResults/TestResult.xml .' 
-				step([$class: 'MSTestPublisher', testResultsFile: 'TestResult.xml', failOnError: true, keepLongStdio: true])
-			}
-		}
+		
 		stage('Build image') {
 			steps {
 				sh 'docker build -t {IMAGE_NAME} .'
